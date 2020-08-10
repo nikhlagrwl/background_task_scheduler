@@ -123,7 +123,7 @@ DATABASES = {
 CELERYBEAT_SCHEDULE = {
     'Daily Update': {
         'task': 'tasktracker.tasks.dailyUpdate',
-        'schedule': crontab(hour = 18, minute = 27)
+        'schedule': crontab(hour = 17, minute = 0)
     },
     'Weekly Update': {
         'task': 'tasktracker.tasks.weeklyUpdate',
