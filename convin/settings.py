@@ -127,11 +127,11 @@ CELERYBEAT_SCHEDULE = {
     },
     'Weekly Update': {
         'task': 'tasktracker.tasks.weeklyUpdate',
-        'schedule': crontab(day_of_week = 'monday', hour = 0, minute = 1)
+        'schedule': crontab(day_of_week = 'monday', hour = 0, minute = 0)
     },
     'Monthly Update': {
         'task': 'tasktracker.tasks.monthlyUpdate',
-        'schedule': crontab(day_of_month = '1', hour = 0, minute = 1)
+        'schedule': crontab(day_of_month = '1', hour = 0, minute = 0)
     }
 }
 

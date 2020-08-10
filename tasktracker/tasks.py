@@ -20,6 +20,7 @@ def dailyUpdate():
 
 	tasktrackers = TaskTracker.objects.filter(update_type = "Daily")
 
+	logger.debug("------ Daily Updates ------\n")
 	for tracker in tasktrackers:
 		emailId = tracker.email #email id of the task tracker to which the updates are to be send
 		taskType = tracker.task_type #type of tasks to send for updates
@@ -32,14 +33,15 @@ def dailyUpdate():
 
 @shared_task
 def weeklyUpdate():
-	tasks = findTasks("Weekly")
-	requiredTime = datetime.now().date() - timedelta(days=7)
+	tasks = {}
+	requiredTime = datetime.now(tz = local_tz).date() - timedelta(days=7)
 
 	for i in range(1, 5):
 			tasks[i] = Task.objects.filter(task_type = i, created_at__gte = requiredTime)
 
 	tasktrackers = TaskTracker.objects.filter(update_type = "Weekly")
 
+	logger.debug("------ Weekly Updates ------\n")
 	for tracker in tasktrackers:
 		emailId = tracker.email
 		taskType = tracker.task_type
@@ -52,12 +54,15 @@ def weeklyUpdate():
 
 @shared_task
 def monthlyUpdate():
-	tasks = findTasks("Monthly")
-	requiredTime = (datetime.now().date() - timedelta(days = 1)).replace(day = 1)
+	tasks = {}
+	requiredTime = (datetime.now(tz = local_tz).date() - timedelta(days = 1)).replace(day = 1)
 
 	for i in range(1, 5):
 			tasks[i] = Task.objects.filter(task_type = i, created_at__gte = requiredTime)
 
+	tasktrackers = TaskTracker.objects.filter(update_type = "Monthly")
+
+	logger.debug("------ Monthly Updates ------\n")
 	for tracker in tasktrackers:
 		emailId = tracker.email
 		taskType = tracker.task_type
