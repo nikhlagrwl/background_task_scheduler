@@ -1,4 +1,4 @@
-# Convin Backend Assignment
+# Background Task Sheduler
 
 Create a virtual environment and install the dependencies using requiremnts.txt (pip3 install -r requirements.txt).   
   
